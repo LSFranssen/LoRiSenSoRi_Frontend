@@ -1,0 +1,83 @@
+body {
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-top: 70px;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  overflow-y: auto;
+  background-color: #ececec;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* todo */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-top: 70px;
+  }
+}
+
+/* todo */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  body {
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-top: 70px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 60px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  body {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 60px;
+    font-size: 16px;
+  }
+}
+
+/* body {
+  margin-right: 55px;
+  margin-left: 55px;
+  margin-top: 90px;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  overflow-y: auto;
+  background-color: #ececec;
+  font-size: 18px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@media (min-width: 320px) {
+  body {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 60px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    margin-top: 70px;
+  }
+} */

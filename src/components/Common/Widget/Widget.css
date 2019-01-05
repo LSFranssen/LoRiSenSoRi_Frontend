@@ -1,0 +1,15 @@
+.Widget {
+    border: 1px solid #333333;
+    border-radius: 3px;
+    box-shadow: 2px 2px 3px #333333;
+    padding: 0px;
+    /*justify-content: space-between;*/
+    text-align: left;
+    background-color: white;
+    width: auto;
+    height: auto;
+  }
+  
+
+
+ 

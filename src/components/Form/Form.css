@@ -1,0 +1,28 @@
+.Form {
+    margin: auto;
+    width: 50%;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .Form {
+      width: 65%;
+    }
+  } 
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    .Form {
+      font-size: 16px;
+      width: 80%;
+    }
+  }
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+    .Form {
+      font-size: 16px;
+      width: 85%;
+    }
+  }

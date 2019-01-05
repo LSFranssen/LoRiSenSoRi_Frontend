@@ -1,0 +1,36 @@
+.Companies {
+  width: 40%;
+  box-sizing: border-box;
+  margin: auto;
+  text-align: center;
+}
+
+.Div {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .Companies {
+    width: 60%;
+  }
+}
+
+/* @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .Companies {
+    width: 50%;
+  }
+} */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .Companies {
+    width: 80%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .Companies {
+    width: 95%;
+  }
+}
+

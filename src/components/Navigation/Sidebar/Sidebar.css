@@ -1,0 +1,78 @@
+.Sidebar {
+  position: fixed;
+  width: 300px;
+  max-width: 70%;
+  height: calc(100% - 40px);
+  top: 40px;
+  bottom: 0px;
+  left: 0;
+  z-index: 200;
+  background-color: #3a3a3a;
+  opacity: 0.95;
+  color: whitesmoke;
+  padding: 0px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+  overflow-x: hidden;
+  display: block;
+}
+
+/* @media (min-width: 320px) {
+  .Sidebar{
+      display: block;
+      width: 250px;
+      padding: 0px 0px;
+  }
+} */
+
+.Open {
+  transform: translateX(0);
+}
+
+.Close {
+  transform: translateX(-100%);
+}
+
+
+
+
+/*
+.Sidebar {
+  position: fixed;
+  width: 300px;
+  max-width: 70%;
+  height: calc(100% - 40px);
+  top: 40px;
+  bottom: 0px;
+  left: 0;
+  z-index: 200;
+  background-color: #3a3a3a;
+  opacity: 0.95;
+  color: whitesmoke;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+  overflow-x: hidden;
+  display: block;
+  width: 52px;
+  padding: 0px 0px;
+}
+
+.Open {
+  transform: translateX(50);
+  transition-property: width;
+}
+
+.Open:hover {
+  width: 250px;
+  transition-property: width;
+}
+
+.Close .NavigationItem {
+  margin: 5px 1px;
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+
+}
+*/

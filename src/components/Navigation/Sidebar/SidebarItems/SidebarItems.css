@@ -1,0 +1,12 @@
+.SidebarItems {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  position: fixed;
+  flex-flow: column;
+  align-items: left;
+  height: 100%;
+  width: 100%;
+  
+}

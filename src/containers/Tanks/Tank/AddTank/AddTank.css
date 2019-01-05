@@ -1,0 +1,10 @@
+h3 {
+  display: block;
+  text-align: center;
+}
+
+.Button {
+  display: block;
+  text-align: right;
+  padding: 5px 10px;
+}

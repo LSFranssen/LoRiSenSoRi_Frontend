@@ -1,0 +1,61 @@
+.Users {
+  width: 40%;
+  box-sizing: border-box;
+  margin: auto;
+  text-align: center;
+}
+
+.Div {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .Users {
+    width: 60%;
+  }
+}
+
+.Link {
+  text-decoration: none;
+  color: white;
+}
+
+/* @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .Users {
+    width: 50%;
+  }
+} */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .Users {
+    width: 80%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .Users {
+    width: 95%;
+  }
+}
+
+
+
+
+/* .Users {
+  width: 70%;
+  box-sizing: border-box;
+  margin: auto;
+  text-align: center;
+}
+
+.Button {
+  display: block;
+  text-align: left;
+}
+
+@media (min-width: 320px) {
+  .Users {
+    width: 90%;
+  }
+} */

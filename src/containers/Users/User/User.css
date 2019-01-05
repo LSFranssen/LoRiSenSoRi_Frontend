@@ -1,0 +1,47 @@
+.User {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: white;
+}
+
+p {
+  text-align: left;
+  padding-left: 10px;
+  line-height: 5px;
+}
+
+.Button {
+  display: block;
+  text-align: right;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .User {
+    font-size: 16px;
+  }
+}
+
+/* @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .User {
+    font-size: 16px;
+  }
+} */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .User {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .User {
+    font-size: 16px;
+  }
+}
