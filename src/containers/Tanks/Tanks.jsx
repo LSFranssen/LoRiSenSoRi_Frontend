@@ -1,42 +1,23 @@
 import React, { Component } from "react";
-// import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import classes from "./Tanks.css";
 import Button from "../../components/Common/Button/Button";
-// import AddTank from "./Tank/AddTank/AddTank";
 import axios from "../../axios-users";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Tank from "./Tank/Tank";
 import Spinner from "../../components/Common/Spinner/Spinner";
+import * as actions from "../../store/actions/index";
 import Search from "../../components/Common/Search/Search";
 
 class Tanks extends Component {
-  state = {
-    tanks: [],
-    loading: true,
-    error: false,
-  };
 
   componentDidMount() {
-    axios
-      .get("/tanks.json")
-      .then(tanks => {
-        const fetchedTanks = [];
-        for (let key in tanks.data) {
-          fetchedTanks.push({
-            ...tanks.data[key],
-            id: key
-          });
-        }
-        this.setState({ loading: false, tanks: fetchedTanks });
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+    this.props.onFetchTanks();
   }
 
-  overviewHandler = () => {
-    this.props.history.push("/overzicht");
+  overviewHandler = (id) => {
+    this.props.history.push("/overzicht/" + id);
   }
 
   addingTankHandler = () => {
@@ -61,8 +42,8 @@ class Tanks extends Component {
 
   render() {
     let tanks = <Spinner />;
-    if (!this.state.loading) {
-      tanks = this.state.tanks.map(tank => {
+    if (!this.props.loading) {
+      tanks = this.props.tanks.map(tank => {
         return (
           <Tank
             key={tank.id}
@@ -87,14 +68,23 @@ class Tanks extends Component {
           <Search />
           </div>
           {tanks}
-          {/* <Route
-            path={this.props.history.push + "/addTank"}
-            render={() => <AddTank />}
-          /> */}
         </div>
     );
   }
 }
 
-export default withErrorHandler(Tanks, axios);
+const mapStateToProps = state => {
+  return {
+    tanks: state.tanks.tanks,
+    loading: state.tanks.loading
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchTanks: () => dispatch(actions.fetchTanks())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Tanks, axios));
 

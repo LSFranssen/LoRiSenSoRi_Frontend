@@ -1,41 +1,22 @@
 import React, { Component } from "react";
-// import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import classes from "./Companies.css";
 import Button from "../../components/Common/Button/Button";
 import axios from "../../axios-users";
 import Company from "./Company/Company";
-// import AddCompany from "./Company/AddCompany/AddCompany";
 import Spinner from "../../components/Common/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import * as actions from "../../store/actions/index";
 import Search from "../../components/Common/Search/Search";
 
 class Companies extends Component {
-  state = {
-    companies: [],
-    loading: true,
-    error: false,
-    addingCompanies: false
-  };
+  // state = {
+  //   addingCompanies: false
+  // };
 
   componentDidMount() {
-    axios
-      .get("/companies.json")
-      .then(companies => {
-        const fetchedCompanies = [];
-        for (let key in companies.data) {
-          fetchedCompanies.push({
-            ...companies.data[key],
-            id: key
-          });
-          console.log(fetchedCompanies);
-        }
-        this.setState({ loading: false, companies: fetchedCompanies });
-        console.log(companies.data);
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+    this.props.onFetchCompanies();
   }
 
   addingCompanyHandler = () => {
@@ -64,8 +45,8 @@ class Companies extends Component {
 
   render() {
     let companies = <Spinner />;
-    if (!this.state.loading) {
-      companies = this.state.companies.map(company => {
+    if (!this.props.loading) {
+      companies = this.props.companies.map(company => {
         return (
           <Company
             key={company.id}
@@ -93,13 +74,23 @@ class Companies extends Component {
           <Search />
         </div>
         {companies}
-        {/* <Route
-          path={this.props.history.push + "/addCompany"}
-          render={() => <AddCompany />}
-        /> */}
       </div>
     );
   }
 }
 
-export default withErrorHandler(Companies, axios);
+const mapStateToProps = state => {
+  return {
+    companies: state.companies.companies,
+    loading: state.companies.loading
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchCompanies: () => dispatch(actions.fetchCompanies())
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Companies, axios));

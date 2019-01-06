@@ -2,32 +2,31 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../../shared/update";
 
 const initialState = {
-  users: [],
+  companies: [],
   loading: false,
   error: false
-  //   addingUser: false,
 };
 
-const fetchUsersStart = (state, action) => {
+const fetchCompaniesStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 
-const fetchUsersSucces = (state, action) => {
+const fetchCompaniesSucces = (state, action) => {
   return updateObject(state, {
-    users: action.users,
+    companies: action.companies,
     loading: false
   });
 };
 
-const fetchUsersFail = (state, action) => {
+const fetchCompaniesFail = (state, action) => {
   return updateObject(state, { loading: false });
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_USERS_START: return fetchUsersStart(state, action);
-    case actionTypes.FETCH_USERS_SUCCES: return fetchUsersSucces(state, action);
-    case actionTypes.FETCH_USERS_FAIL: return fetchUsersFail(state, action);
+    case actionTypes.FETCH_COMPANIES_START: return fetchCompaniesStart(state, action);
+    case actionTypes.FETCH_COMPANIES_SUCCES: return fetchCompaniesSucces(state, action);
+    case actionTypes.FETCH_COMPANIES_FAIL: return fetchCompaniesFail(state, action);
     default: return state;
   }
 };

@@ -45,7 +45,7 @@ class App extends Component {
           <Route path="/users/:id" component={AddUser} />
           <Route path="/companies/:id" component={AddCompany} />
         
-          <Route path="/overview" exact component={Overview} />
+          <Route path="/overview/:id" component={Overview} />
 
           <Redirect to="/home" />
         </Switch>

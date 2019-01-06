@@ -9,17 +9,20 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import authReducer from "./store/reducers/auth";
+import usersReducer from "./store/reducers/users";
+import tanksReducer from "./store/reducers/tanks";
+import companiesReducer from "./store/reducers/companies";
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  users: usersReducer,
+  tanks: tanksReducer,
+  companies: companiesReducer
 });
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ?  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 const app = (
   <Provider store={store}>

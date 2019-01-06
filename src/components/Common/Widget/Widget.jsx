@@ -14,7 +14,7 @@ class Widget extends Component {
         <div
           className={[classes.Widget, classes[this.props.wgtType]].join(" ")}
         >
-          <h3>{this.props.title}</h3>
+          <h4>{this.props.title}</h4>
           {this.props.loading ? <Spinner /> : ""}
           <div className="content">{this.props.children}</div>
         </div>
