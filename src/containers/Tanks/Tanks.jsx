@@ -17,20 +17,32 @@ class Tanks extends Component {
   }
 
   overviewHandler = (id) => {
-    this.props.history.push("/overzicht/" + id);
+    this.props.history.push({pathname: this.props.match.url + "/overview/" + id});
   }
 
   addingTankHandler = () => {
     this.props.history.push({pathname: this.props.match.url + "/add-tank"});
   };
 
+  // editTankHandler = (id) => {
+  //   this.props.history.push({pathname: this.props.match.url + "/edit-tank/" + id});
+  // }
+
   editTankHandler = (id) => {
-    this.props.history.push({pathname: this.props.match.url + "/edit-tank/" + id});
-  }
+    axios
+      .get("tanks/" + id + ".json")
+      .then(response => {
+        console.log(response);
+        this.setState({ loading: false });
+      })
+      .catch(error => {
+        this.setState({ loading: false });
+      });
+  };
 
   removeTankHandler = (id) => {
     axios
-      .delete("tanks/" + id)
+      .delete("tanks/" + id + ".json")
       .then(response => {
         console.log(response);
         this.setState({ loading: false });
@@ -50,7 +62,7 @@ class Tanks extends Component {
             id={tank.id}
             tanknaam={tank.tankData.tanknaam}
             status={tank.tankData.status}
-            overview={this.overviewHandler}
+            overview={() => this.overviewHandler(tank.id)}
             editTank={() => this.editTankHandler(tank.id)}
             removeTank={()=> this.removeTankHandler(tank.id)}
           />

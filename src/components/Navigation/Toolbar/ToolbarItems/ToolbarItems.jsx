@@ -6,8 +6,8 @@ import NavigationItem from "../../NavigationItem/NavigationItem";
 const toolbarItems = props => (
   <ul className={classes.ToolbarItems}>
     {!props.isAuthenticated ? (
-      <NavigationItem link="/authenticate">Inloggen</NavigationItem>) : (
-      <NavigationItem link="/logout">Uitloggen</NavigationItem>
+      <NavigationItem className="Left" link="/authenticate">Inloggen</NavigationItem>) : (
+      <NavigationItem className="Right" link="/logout">Uitloggen</NavigationItem>
     )}
   </ul>
 );

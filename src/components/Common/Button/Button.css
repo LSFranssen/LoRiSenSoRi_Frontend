@@ -1,32 +1,40 @@
 .Button {
-    background-color: #5a5a5a;
-    border: 1px solid #5a5a5a;
-    color: white;
-    cursor: pointer;
-    font: inherit;
-    font-size: 14px;
-    padding: 6px;
-    margin: 5px;
-    height: auto;
-    width: auto;
-    border-radius: 3px;
-    text-align: center; 
-    font-style: inherit;
-    font-size: 17px;
-  }
-    
-  .Button:hover {
-    background-color: #9e9e9e;
-    color: black;
-  }
-    
-  .Link {
-    color: #428bca;
-  }
-  
-  
-  .Button:disabled {
-    color: #ccc;
-    cursor: not-allowed;
-    background-color: #8a8a8a;
-  }
+  background-color: #5a5a5a;
+  border: 1px solid #5a5a5a;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  padding: 6px;
+  margin: 5px;
+  height: auto;
+  width: auto;
+  border-radius: 3px;
+  text-align: center;
+  font-style: inherit;
+  font-size: 17px;
+}
+
+.Button:hover {
+  background-color: #9e9e9e;
+  color: black;
+}
+
+.Link {
+  color: #428bca;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  background-color: #8a8a8a;
+}
+
+.Open {
+  background-color: green;
+}
+
+.Closed {
+  background-color: red;
+}
+

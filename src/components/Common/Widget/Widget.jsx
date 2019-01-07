@@ -1,26 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 
 import classes from "./Widget.css";
-import Spinner from "../Spinner/Spinner";
 
-class Widget extends Component {
-  componentWillUpdate() {
-    console.log("[Modal] WillUpdate");
-  }
-
-  render() {
-    return (
-      <>
-        <div
-          className={[classes.Widget, classes[this.props.wgtType]].join(" ")}
-        >
-          <h4>{this.props.title}</h4>
-          {this.props.loading ? <Spinner /> : ""}
-          <div className="content">{this.props.children}</div>
+const Widget = (props) => (
+        <div className={classes.Widget}>
+          <h4>{props.title}</h4>
+          <div className={[classes.Content, classes[props.contentType]].join(" ")}>{props.children}</div>
         </div>
-      </>
+      
     );
-  }
-}
+  
+
 
 export default Widget;

@@ -11,7 +11,7 @@ import Companies from "./containers/Companies/Companies";
 import AddCompany from "./containers/Companies/Company/AddCompany/AddCompany";
 import Tanks from "./containers/Tanks/Tanks";
 import AddTank from "./containers/Tanks/Tank/AddTank/AddTank";
-import Overview from "./containers/Tanks/Tank/Overview/Overview";
+import Overview from "./containers/Tanks/Overview/Overview";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 import PageNotFound from "./components/Error/PageNotFound"
@@ -40,12 +40,10 @@ class App extends Component {
           <Route path="/companies" exact component={Companies} />
           <Route path="/users" exact component={Users} />
           <Route path="/overige" exact component={Contact} />
-
+          <Route path="/tanks/overview/:id" component={Overview} />
           <Route path="/tanks/:id" component={AddTank} />
           <Route path="/users/:id" component={AddUser} />
           <Route path="/companies/:id" component={AddCompany} />
-        
-          <Route path="/overview/:id" component={Overview} />
 
           <Redirect to="/home" />
         </Switch>
@@ -77,8 +75,3 @@ export default withRouter(
     mapDispatchToProps
   )(App)
 );
-
-
-          // {/* <Route path="/addTank" component={AddTank} /> */}
-          // {/* <Route path="/addUser" component={AddUser} /> */}
-          // {/* <Route path="/addCompany" component={AddCompany} /> */}

@@ -3,7 +3,13 @@
     padding: 0px;
     list-style: none;
     display: flex;
-    flex-flow: column;
-    align-items: center;
     width: 100%;
+  }
+
+  .Left {
+    align-self: flex-start;
+  }
+
+  .Right {
+    align-self: flex-end;
   }

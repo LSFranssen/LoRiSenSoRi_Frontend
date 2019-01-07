@@ -23,17 +23,29 @@ class Companies extends Component {
     this.props.history.push({pathname: this.props.match.url + "/add-company"});
   };
 
-  editCompanyHandler = (id) => {
-    this.props.history.push({pathname: this.props.match.url + "/edit-company/" + id});
-  };
+  // editCompanyHandler = (id) => {
+  //   this.props.history.push({pathname: this.props.match.url + "/edit-company/" + id});
+  // };
 
   // cancelAddCompanyHandler = () => {
   //   this.props.history.goBack();
   // };
 
+  editCompanyHandler = (id) => {
+    axios
+      .get("companies/" + id + ".json")
+      .then(response => {
+        console.log(response);
+        this.setState({ loading: false });
+      })
+      .catch(error => {
+        this.setState({ loading: false });
+      });
+  };
+
   removeCompanyHandler = (id) => {
     axios
-      .delete("companies/" + id)
+      .delete("companies/" + id + ".json")
       .then(response => {
         console.log(response);
         this.setState({ loading: false });

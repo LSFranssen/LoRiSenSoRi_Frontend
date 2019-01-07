@@ -23,19 +23,17 @@ class Users extends Component {
 
   addingUserHandler = () => {
     this.props.history.push({ pathname: this.props.match.url + "/add-user" });
-    // this.setState({ addingUser: true });
   };
 
   editUserHandler = id => {
     this.props.history.push({
       pathname: this.props.match.url + "/edit-user/" + id
     });
-    // this.setState({ addingUser: false });
   };
 
   removeUserHandler = id => {
     axios
-      .delete("users/" + id)
+      .delete("users/" + id + ".json")
       .then(response => {
         console.log(response);
         this.setState({ loading: false });
@@ -87,11 +85,21 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchUsers: () => dispatch(actions.fetchUsers())
+    onFetchUsers: () => dispatch(actions.fetchUsers()),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Users, axios));
+
+
+
+
+
+
+
+
+
+
 
 
 // import React, { Component } from "react";

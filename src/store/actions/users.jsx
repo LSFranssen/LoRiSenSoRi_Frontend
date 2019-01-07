@@ -2,10 +2,10 @@ import * as actionTypes from "./actionTypes";
 import axios from "../../axios-users";
 
 export const fetchUsersStart = () => {
-    return {
-      type: actionTypes.FETCH_USERS_START
-    };
+  return {
+    type: actionTypes.FETCH_USERS_START
   };
+};
 
 export const fetchUsersSucces = users => {
   return {
@@ -41,3 +41,100 @@ export const fetchUsers = () => {
       });
   };
 };
+
+//TODO
+export const fetchUserByIdStart = () => {
+  return {
+    type: actionTypes.FETCH_USER_BY_ID_START
+  };
+};
+
+export const fetchUserByIdSucces = id => {
+  return {
+    type: actionTypes.FETCH_USER_BY_ID_SUCCES,
+    id: id
+  };
+};
+
+export const fetchUserByIdFail = error => {
+  return {
+    type: actionTypes.FETCH_USER_BY_ID_FAIL,
+    error: error
+  };
+};
+
+export const addUserStart = () => {
+  return {
+    type: actionTypes.ADD_USER_START
+  }
+}
+
+export const addUserSucces = (userData, userId, companyId) => {
+  return {
+    type: actionTypes.ADD_USER_SUCCES,
+    userData: userData,
+    userId: userId,
+    companyId: companyId
+  };
+};
+
+export const addUserFail = error => {
+  return {
+    type: actionTypes.ADD_USER_FAIL,
+    error: error
+  };
+};
+
+// bedrijfsid erbij? : response.data.
+export const addUser = ( userData) => {
+  return dispatch => {
+    dispatch(addUserStart());
+    axios
+      .post("/users.json", userData) //endpoint
+      .then(response => {
+        console.log(response.data.name);
+        dispatch(addUserSucces(response.data.name, userData));
+      })
+      .catch(error => {
+        dispatch(addUserFail(error));
+      });
+  };
+};
+
+export const editUser = id => {
+  return {
+    type: actionTypes.EDIT_USER,
+    id: id
+  };
+};
+
+export const removeUser = () => {
+  return {
+    type: actionTypes.REMOVE_USER
+  };
+};
+
+// export const handleChangeUserform = () => {
+//   return {
+//     type: actionTypes.HANDLE_CHANGE_USERFORM
+//   }
+// }
+
+export const fetchUserById = id => {
+  return dispatch => {
+    dispatch(fetchUserByIdStart());
+    axios
+      .get("/users/" + id + ".json")
+      .then(user => {
+        dispatch(fetchUserByIdSucces(user.data));
+        console.log(user.data);
+      })
+      .catch(error => {
+        dispatch(fetchUserByIdFail(error));
+      });
+  };
+};
+
+
+
+

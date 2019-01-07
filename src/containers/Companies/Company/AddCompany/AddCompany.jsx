@@ -191,9 +191,10 @@ class AddCompany extends Component {
     if (this.props.match.params.id === "edit-company") {
       axios
         .get("/companies/-LV3m8D5JfVVkKoKrtv6.json")
-        .then(companies => {
-          this.setState({ loading: false, companies: companies.data });
-          console.log(companies);
+        .then(company => {
+          this.setState({ loading: false, company: company.data });
+          console.log("data van 1" + company);
+          console.log(company);
         })
         .catch(error => {
           this.setState({ loading: false });

@@ -5,7 +5,9 @@ export {
 } from './auth'
 
 export {
-  fetchUsers
+  fetchUsers,
+  fetchUserById,
+  addUser,
 } from './users'
 
 export {
