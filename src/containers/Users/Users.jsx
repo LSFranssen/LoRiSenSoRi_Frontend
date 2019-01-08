@@ -11,11 +11,6 @@ import * as actions from "../../store/actions/index";
 import Search from "../../components/Common/Search/Search";
 
 class Users extends Component {
-  // state = {
-  //   addingUser: true
-  //   searchUserText: "",
-  //   searchResult: []
-  // };
 
   componentDidMount() {
     this.props.onFetchUsers();
@@ -26,21 +21,13 @@ class Users extends Component {
   };
 
   editUserHandler = id => {
-    this.props.history.push({
-      pathname: this.props.match.url + "/edit-user/" + id
+    this.props.history.push({pathname: this.props.match.url + "/edit-user/" + id
     });
   };
 
-  removeUserHandler = id => {
-    axios
-      .delete("users/" + id + ".json")
-      .then(response => {
-        console.log(response);
-        this.setState({ loading: false });
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+  removeUserHandler = (id) => {
+    this.props.onDeleteUser(id);
+    console.log(id);
   };
 
   render() {
@@ -86,6 +73,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchUsers: () => dispatch(actions.fetchUsers()),
+    onDeleteUser: (id) => dispatch(actions.deleteUser(id))
   };
 };
 

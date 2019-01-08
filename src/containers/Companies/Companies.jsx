@@ -44,15 +44,17 @@ class Companies extends Component {
   };
 
   removeCompanyHandler = (id) => {
-    axios
-      .delete("companies/" + id + ".json")
-      .then(response => {
-        console.log(response);
-        this.setState({ loading: false });
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+    this.props.onDeleteCompanies(id);
+    console.log(id);
+  //   axios
+  //     .delete("companies/" + id + ".json")
+  //     .then(response => {
+  //       console.log(response);
+  //       this.setState({ loading: false });
+  //     })
+  //     .catch(error => {
+  //       this.setState({ loading: false });
+  //     });
   };
 
   render() {
@@ -100,7 +102,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchCompanies: () => dispatch(actions.fetchCompanies())
+    onFetchCompanies: () => dispatch(actions.fetchCompanies()),
+    onDeleteCompanies: (id) => dispatch(actions.deleteCompany(id))
   };
 };
 

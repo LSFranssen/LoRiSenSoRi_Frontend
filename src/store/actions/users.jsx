@@ -1,20 +1,21 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-users";
 
-export const fetchUsersStart = () => {
+// fetch all users
+const fetchUsersStart = () => {
   return {
     type: actionTypes.FETCH_USERS_START
   };
 };
 
-export const fetchUsersSucces = users => {
+const fetchUsersSucces = users => {
   return {
-    type: actionTypes.FETCH_USERS_SUCCES,
+    type: actionTypes.FETCH_USERS_SUCCESS,
     users: users
   };
 };
 
-export const fetchUsersFail = error => {
+const fetchUsersFail = error => {
   return {
     type: actionTypes.FETCH_USERS_FAIL,
     error: error
@@ -42,43 +43,59 @@ export const fetchUsers = () => {
   };
 };
 
-//TODO
-export const fetchUserByIdStart = () => {
+//TODO Fetch one user by id
+const fetchUserByIdStart = () => {
   return {
     type: actionTypes.FETCH_USER_BY_ID_START
   };
 };
 
-export const fetchUserByIdSucces = id => {
+const fetchUserByIdSucces = id => {
   return {
-    type: actionTypes.FETCH_USER_BY_ID_SUCCES,
+    type: actionTypes.FETCH_USER_BY_ID_SUCCESS,
     id: id
   };
 };
 
-export const fetchUserByIdFail = error => {
+const fetchUserByIdFail = error => {
   return {
     type: actionTypes.FETCH_USER_BY_ID_FAIL,
     error: error
   };
 };
 
-export const addUserStart = () => {
+export const fetchUserById = id => {
+  return dispatch => {
+    dispatch(fetchUserByIdStart());
+    axios
+      .get("/users/" + id + ".json")
+      .then(user => {
+        dispatch(fetchUserByIdSucces(user.data));
+        console.log(user);
+      })
+      .catch(error => {
+        dispatch(fetchUserByIdFail(error));
+      });
+  };
+};
+
+// Add user
+const addUserStart = () => {
   return {
     type: actionTypes.ADD_USER_START
-  }
-}
+  };
+};
 
-export const addUserSucces = (userData, userId, companyId) => {
+const addUserSucces = (userData, userId, companyId) => {
   return {
-    type: actionTypes.ADD_USER_SUCCES,
+    type: actionTypes.ADD_USER_SUCCESS,
     userData: userData,
     userId: userId,
     companyId: companyId
   };
 };
 
-export const addUserFail = error => {
+const addUserFail = error => {
   return {
     type: actionTypes.ADD_USER_FAIL,
     error: error
@@ -86,7 +103,7 @@ export const addUserFail = error => {
 };
 
 // bedrijfsid erbij? : response.data.
-export const addUser = ( userData) => {
+export const addUser = userData => {
   return dispatch => {
     dispatch(addUserStart());
     axios
@@ -101,6 +118,7 @@ export const addUser = ( userData) => {
   };
 };
 
+// Edit user
 export const editUser = id => {
   return {
     type: actionTypes.EDIT_USER,
@@ -108,33 +126,72 @@ export const editUser = id => {
   };
 };
 
-export const removeUser = () => {
+// Remove user
+const deleteUserByIdStart = () => {
   return {
-    type: actionTypes.REMOVE_USER
+    type: actionTypes.DELETE_USER_BY_ID_START
   };
 };
+
+const deleteUserByIdSucces = (users, id) => {
+  return {
+    type: actionTypes.DELETE_USER_BY_ID_SUCCESS,
+    users: users,
+    id: id
+  };
+};
+
+const deleteUserByIdFail = error => {
+  return {
+    type: actionTypes.DELETE_USER_BY_ID_FAIL,
+    error: error
+  };
+};
+
+export const deleteUser = id => {
+  return dispatch => {
+    dispatch(deleteUserByIdStart());
+    axios
+      .delete("/users/" + id + ".json")
+      .then(response => {
+        dispatch(deleteUserByIdSucces(response));
+        dispatch(fetchUsers());
+        console.log(response);
+      })
+      .catch(error => {
+        dispatch(deleteUserByIdFail(error));
+      });
+  };
+};
+
+// axios
+// .delete("users/" + id + ".json")
+// .then(response => {
+//   console.log(response);
+//   this.setState({ loading: false });
+// })
+// .catch(error => {
+//   this.setState({ loading: false });
+// });
+// };
+
+// export const fetchUserById = id => {
+//   return dispatch => {
+//     dispatch(fetchUserByIdStart());
+//     axios
+//       .get("/users/" + id + ".json")
+//       .then(user => {
+//         dispatch(fetchUserByIdSucces(user.data));
+//         console.log(user);
+//       })
+//       .catch(error => {
+//         dispatch(fetchUserByIdFail(error));
+//       });
+//   };
+// };
 
 // export const handleChangeUserform = () => {
 //   return {
 //     type: actionTypes.HANDLE_CHANGE_USERFORM
 //   }
 // }
-
-export const fetchUserById = id => {
-  return dispatch => {
-    dispatch(fetchUserByIdStart());
-    axios
-      .get("/users/" + id + ".json")
-      .then(user => {
-        dispatch(fetchUserByIdSucces(user.data));
-        console.log(user.data);
-      })
-      .catch(error => {
-        dispatch(fetchUserByIdFail(error));
-      });
-  };
-};
-
-
-
-

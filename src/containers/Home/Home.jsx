@@ -6,6 +6,7 @@ import Logo from "../../components/Common/Logo/Logo";
 
 class Home extends Component {
   state = {
+    sensordata: [],
     loading: true
   };
 

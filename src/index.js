@@ -13,14 +13,14 @@ import usersReducer from "./store/reducers/users";
 import tanksReducer from "./store/reducers/tanks";
 import companiesReducer from "./store/reducers/companies";
 
+const composeEnhancers = process.env.NODE_ENV === 'development' ?  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+
 const rootReducer = combineReducers({
   auth: authReducer,
   users: usersReducer,
   tanks: tanksReducer,
   companies: companiesReducer
 });
-
-const composeEnhancers = process.env.NODE_ENV === 'development' ?  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 

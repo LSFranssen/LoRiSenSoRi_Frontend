@@ -1,19 +1,26 @@
+// Auth
 export {
-    auth,
-    logout,
-    authCheckState
+  auth,
+  logout,
+  authCheckState
 } from './auth'
 
+// Users
 export {
   fetchUsers,
   fetchUserById,
   addUser,
+  deleteUser,
 } from './users'
 
+// Tanks
 export {
-    fetchTanks
-  } from './tanks'
+  fetchTanks,
+  deleteTank
+} from './tanks'
 
-  export {
-    fetchCompanies
-  } from './companies'
+// Companies
+export {
+  fetchCompanies,
+  deleteCompany
+} from './companies'

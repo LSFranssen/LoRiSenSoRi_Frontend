@@ -101,7 +101,7 @@ class AddTank extends Component {
         elementType: "input",
         elementConfig: {
           type: "number",
-          placeholder: "Inhoud in liters"
+          placeholder: "Gewicht in kilo's"
         },
         value: "",
         validation: {
@@ -147,7 +147,7 @@ class AddTank extends Component {
         elementConfig: {
           options: [
             {
-              value: "Selecteer de rechten",
+              value: "Selecteer de status",
               displayValue: " "
             },
             {
@@ -155,12 +155,12 @@ class AddTank extends Component {
               displayValue: "In gebruik"
             },
             {
-              value: "functioneel beheerder",
-              displayValue: "Functioneel beheerder"
+              value: "Non-actief",
+              displayValue: "Non-actief"
             },
             {
-              value: "technisch beheerder",
-              displayValue: "Technisch beheerder"
+              value: "In reparatie",
+              displayValue: "In reparatie"
             }
           ]
         },

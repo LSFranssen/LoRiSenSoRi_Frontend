@@ -1,15 +1,16 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-users";
 
+// fetch all companies
 export const fetchCompaniesStart = () => {
-    return {
-      type: actionTypes.FETCH_COMPANIES_START
-    };
+  return {
+    type: actionTypes.FETCH_COMPANIES_START
   };
+};
 
 export const fetchCompaniesSucces = companies => {
   return {
-    type: actionTypes.FETCH_COMPANIES_SUCCES,
+    type: actionTypes.FETCH_COMPANIES_SUCCESS,
     companies: companies
   };
 };
@@ -42,4 +43,40 @@ export const fetchCompanies = () => {
   };
 };
 
+// Remove company
+const deleteCompanyByIdStart = () => {
+  return {
+    type: actionTypes.DELETE_COMPANY_BY_ID_START
+  };
+};
 
+const deleteCompanyByIdSucces = (companies, id) => {
+  return {
+    type: actionTypes.DELETE_COMPANY_BY_ID_SUCCESS,
+    companies: companies,
+    id: id
+  };
+};
+
+const deleteCompanyByIdFail = error => {
+  return {
+    type: actionTypes.DELETE_COMPANY_BY_ID_FAIL,
+    error: error
+  };
+};
+
+export const deleteCompany = id => {
+  return dispatch => {
+    dispatch(deleteCompanyByIdStart());
+    axios
+      .delete("/companies/" + id + ".json")
+      .then(response => {
+        dispatch(deleteCompanyByIdSucces(response));
+        dispatch(fetchCompanies());
+        console.log(response);
+      })
+      .catch(error => {
+        dispatch(deleteCompanyByIdFail(error));
+      });
+  };
+};

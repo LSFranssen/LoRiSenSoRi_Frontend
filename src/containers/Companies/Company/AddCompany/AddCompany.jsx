@@ -63,10 +63,9 @@ class AddCompany extends Component {
         },
         value: "",
         validation: {
-          required: true
+          required: false
         },
-        valid: false,
-        touched: false
+        valid: true,
       },
 
       postcode: {
@@ -187,20 +186,20 @@ class AddCompany extends Component {
   
   };
 
-  componentDidMount() {
-    if (this.props.match.params.id === "edit-company") {
-      axios
-        .get("/companies/-LV3m8D5JfVVkKoKrtv6.json")
-        .then(company => {
-          this.setState({ loading: false, company: company.data });
-          console.log("data van 1" + company);
-          console.log(company);
-        })
-        .catch(error => {
-          this.setState({ loading: false });
-        });
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.match.params.id === "edit-company") {
+  //     axios
+  //       .get("/companies/-LV3m8D5JfVVkKoKrtv6.json")
+  //       .then(company => {
+  //         this.setState({ loading: false, company: company.data });
+  //         console.log("data van 1" + company);
+  //         console.log(company);
+  //       })
+  //       .catch(error => {
+  //         this.setState({ loading: false });
+  //       });
+  //   }
+  // }
 
   saveAddCompanyHandler = event => {
     event.preventDefault();

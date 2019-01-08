@@ -16,19 +16,20 @@ class Tanks extends Component {
     this.props.onFetchTanks();
   }
 
-  overviewHandler = (id) => {
-    this.props.history.push({pathname: this.props.match.url + "/overview/" + id});
-  }
+  overviewHandler = id => {
+    this.props.history.push({pathname: this.props.match.url + "/overview/" + id
+    });
+  };
 
   addingTankHandler = () => {
-    this.props.history.push({pathname: this.props.match.url + "/add-tank"});
+    this.props.history.push({ pathname: this.props.match.url + "/add-tank" });
   };
 
   // editTankHandler = (id) => {
   //   this.props.history.push({pathname: this.props.match.url + "/edit-tank/" + id});
   // }
 
-  editTankHandler = (id) => {
+  editTankHandler = id => {
     axios
       .get("tanks/" + id + ".json")
       .then(response => {
@@ -40,16 +41,18 @@ class Tanks extends Component {
       });
   };
 
-  removeTankHandler = (id) => {
-    axios
-      .delete("tanks/" + id + ".json")
-      .then(response => {
-        console.log(response);
-        this.setState({ loading: false });
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+  removeTankHandler = id => {
+    this.props.onDeleteTanks(id);
+    console.log(id);
+  //   axios
+  //     .delete("tanks/" + id + ".json")
+  //     .then(response => {
+  //       console.log(response);
+  //       this.setState({ loading: false });
+  //     })
+  //     .catch(error => {
+  //       this.setState({ loading: false });
+  //     });
   };
 
   render() {
@@ -64,7 +67,7 @@ class Tanks extends Component {
             status={tank.tankData.status}
             overview={() => this.overviewHandler(tank.id)}
             editTank={() => this.editTankHandler(tank.id)}
-            removeTank={()=> this.removeTankHandler(tank.id)}
+            removeTank={() => this.removeTankHandler(tank.id)}
           />
         );
       });
@@ -78,9 +81,9 @@ class Tanks extends Component {
             Toevoegen
           </Button>
           <Search />
-          </div>
-          {tanks}
         </div>
+        {tanks}
+      </div>
     );
   }
 }
@@ -94,9 +97,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchTanks: () => dispatch(actions.fetchTanks())
+    onFetchTanks: () => dispatch(actions.fetchTanks()),
+    onDeleteTanks: (id) => dispatch(actions.deleteTank(id))
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Tanks, axios));
-

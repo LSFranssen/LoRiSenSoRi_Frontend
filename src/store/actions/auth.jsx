@@ -9,7 +9,7 @@ export const authStart = () => {
 
 export const authSucces = (token, userId) => {
   return {
-    type: actionTypes.AUTH_SUCCES,
+    type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId: userId
   };
