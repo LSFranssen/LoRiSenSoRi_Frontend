@@ -30,9 +30,9 @@ export const fetchTanks = () => {
         )
       .then(tanks => {
         const fetchedTanks = [];
-        for (let key in tanks.params) {
+        for (let key in tanks.data) {
           fetchedTanks.push({
-            ...tanks.params[key],
+            ...tanks.data[key],
             tankId: key
           });
           console.log(tanks.data[key].tankId)
