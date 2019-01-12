@@ -22,11 +22,17 @@ export const fetchCompaniesFail = error => {
   };
 };
 
-export const fetchCompanies = () => {
+export const fetchCompanies = (token) => {
   return dispatch => {
     dispatch(fetchCompaniesStart());
+    console.log(localStorage.getItem("token"));
+    console.log(token);
+    // const token = localStorage.getItem("token");
     axios
-      .get("/companies.json")
+      .get("http://localhost:9004/bedrijf/", { 
+        headers: { Authorization: "Bearer " + token,
+        'Content-Type': 'application/json'
+     }})
       .then(companies => {
         const fetchedCompanies = [];
         for (let key in companies.data) {

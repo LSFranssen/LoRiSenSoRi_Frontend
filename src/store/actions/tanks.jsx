@@ -26,14 +26,16 @@ export const fetchTanks = () => {
   return dispatch => {
     dispatch(fetchTanksStart());
     axios
-      .get("/tanks.json")
+      .get("http://localhost:9004/api/tank/" 
+        )
       .then(tanks => {
         const fetchedTanks = [];
-        for (let key in tanks.data) {
+        for (let key in tanks.params) {
           fetchedTanks.push({
-            ...tanks.data[key],
-            id: key
+            ...tanks.params[key],
+            tankId: key
           });
+          console.log(tanks.data[key].tankId)
         }
         dispatch(fetchTanksSucces(fetchedTanks));
       })
@@ -50,11 +52,11 @@ const deleteTankByIdStart = () => {
   };
 };
 
-const deleteTankByIdSucces = (tanks, id) => {
+const deleteTankByIdSucces = (tanks, tankId) => {
   return {
     type: actionTypes.DELETE_TANK_BY_ID_SUCCESS,
     tanks: tanks,
-    id: id
+    tankId: tankId
   };
 };
 
@@ -65,15 +67,15 @@ const deleteTankByIdFail = error => {
   };
 };
 
-export const deleteTank = id => {
+export const deleteTank = tankId => {
   return dispatch => {
     dispatch(deleteTankByIdStart());
     axios
-      .delete("/tanks/" + id + ".json")
+      .delete("/tanks/" + tankId)
       .then(response => {
         dispatch(deleteTankByIdSucces(response));
         dispatch(fetchTanks());
-        console.log(response);
+        console.log(response.data);
       })
       .catch(error => {
         dispatch(deleteTankByIdFail(error));

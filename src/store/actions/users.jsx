@@ -86,14 +86,22 @@ const addUserStart = () => {
   };
 };
 
-const addUserSucces = (userData, userId, companyId) => {
+// const addUserSucces = (userData, userId, companyId) => {
+//   return {
+//     type: actionTypes.ADD_USER_SUCCESS,
+//     userData: userData,
+//     userId: userId,
+//     companyId: companyId
+//   };
+// };
+
+const addUserSucces = (userData) => {
   return {
     type: actionTypes.ADD_USER_SUCCESS,
     userData: userData,
-    userId: userId,
-    companyId: companyId
   };
 };
+
 
 const addUserFail = error => {
   return {

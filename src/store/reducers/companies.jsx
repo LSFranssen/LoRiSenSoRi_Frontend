@@ -4,6 +4,7 @@ import { updateObject } from "../../shared/update";
 const initialState = {
   companies: [],
   loading: false,
+  // token: null
 };
 
 // fetch all companies

@@ -4,161 +4,160 @@ import { updateObject } from "../../shared/update";
 const initialState = {
   users: [],
   loading: false,
-  // error: false,
-  // userId: null,
   // addingUser: false,
 
   // companyId: null, hoe deze mee te sturen
   // userId: null, hoe deze mee te sturen
-  userForm: {
-    voornaam: {
-      elementType: "input",
-      elementConfig: {
-        type: "text",
-        placeholder: "Voornaam"
-      },
-      value: "",
-      validation: {
-        required: true
-      },
-      valid: false,
-      touched: false
-    },
+  
+  // userForm: {
+  //   voornaam: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "text",
+  //       placeholder: "Voornaam"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: true
+  //     },
+  //     valid: false,
+  //     touched: false
+  //   },
 
-    tussenvoegsel: {
-      elementType: "input",
-      elementConfig: {
-        type: "text",
-        placeholder: "Tussenvoegsel"
-      },
-      value: "",
-      validation: {
-        required: false
-      },
-      valid: true
-    },
+  //   tussenvoegsel: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "text",
+  //       placeholder: "Tussenvoegsel"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: false
+  //     },
+  //     valid: true
+  //   },
 
-    achternaam: {
-      elementType: "input",
-      elementConfig: {
-        type: "text",
-        placeholder: "Achternaam"
-      },
-      value: "",
-      validation: {
-        required: true
-      },
-      valid: false,
-      touched: false
-    },
+  //   achternaam: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "text",
+  //       placeholder: "Achternaam"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: true
+  //     },
+  //     valid: false,
+  //     touched: false
+  //   },
 
-    geboortedatum: {
-      elementType: "input",
-      elementConfig: {
-        type: "date"
-      },
-      value: "",
-      validation: {
-        required: true
-      },
-      valid: false,
-      touched: false
-    },
+  //   geboortedatum: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "date"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: true
+  //     },
+  //     valid: false,
+  //     touched: false
+  //   },
 
-    gebruikersnaam: {
-      elementType: "input",
-      elementConfig: {
-        type: "text",
-        placeholder: "Gebruikersnaam"
-      },
-      value: "",
-      validation: {
-        required: true
-      },
-      valid: false,
-      touched: false
-    },
+  //   gebruikersnaam: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "text",
+  //       placeholder: "Gebruikersnaam"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: true
+  //     },
+  //     valid: false,
+  //     touched: false
+  //   },
 
-    wachtwoord: {
-      elementType: "input",
-      elementConfig: {
-        type: "password",
-        placeholder: "Wachtwoord"
-      },
-      value: "",
-      validation: {
-        required: true,
-        password: true
-      },
-      valid: false,
-      touched: false,
-      errorMessage:
-        "Een wachtwoord moet bestaan uit minimaal 8 karakters, een hoofdletter, kleine letter, nummer en speciaal karakter"
-    },
+  //   wachtwoord: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "password",
+  //       placeholder: "Wachtwoord"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: true,
+  //       password: true
+  //     },
+  //     valid: false,
+  //     touched: false,
+  //     errorMessage:
+  //       "Een wachtwoord moet bestaan uit minimaal 8 karakters, een hoofdletter, kleine letter, nummer en speciaal karakter"
+  //   },
 
-    email: {
-      elementType: "input",
-      elementConfig: {
-        type: "email",
-        placeholder: "E-mailadres"
-      },
-      value: "",
-      validation: {
-        required: true,
-        email: true
-      },
-      valid: false,
-      touched: false,
-      errorMessage: "Voer een geldig e-mailadres in"
-    },
+  //   email: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "email",
+  //       placeholder: "E-mailadres"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: true,
+  //       email: true
+  //     },
+  //     valid: false,
+  //     touched: false,
+  //     errorMessage: "Voer een geldig e-mailadres in"
+  //   },
 
-    telefoonnummer: {
-      elementType: "input",
-      elementConfig: {
-        type: "tel",
-        placeholder: "Telefoonnummer"
-      },
-      value: "",
-      validation: {
-        required: true,
-        minLength: 10,
-        maxLength: 15
-      },
-      valid: false,
-      touched: false,
-      errorMessage: "Voer een geldig telefoonnummer in"
-    },
+  //   telefoonnummer: {
+  //     elementType: "input",
+  //     elementConfig: {
+  //       type: "tel",
+  //       placeholder: "Telefoonnummer"
+  //     },
+  //     value: "",
+  //     validation: {
+  //       required: true,
+  //       minLength: 10,
+  //       maxLength: 15
+  //     },
+  //     valid: false,
+  //     touched: false,
+  //     errorMessage: "Voer een geldig telefoonnummer in"
+  //   },
 
-    rechten: {
-      label: "Selecteer de rechten",
-      elementType: "select",
-      elementConfig: {
-        options: [
-          {
-            value: "Selecteer de rechten",
-            displayValue: " "
-          },
-          {
-            value: "Medewerker",
-            displayValue: "Medewerker"
-          },
-          {
-            value: "Functioneel beheerder",
-            displayValue: "Functioneel beheerder"
-          },
-          {
-            value: "Technisch beheerder",
-            displayValue: "Technisch beheerder"
-          }
-        ]
-      },
-      value: "",
-      validation: {},
-      valid: false,
-      touched: false
-    }
-  },
-  formIsValid: false
+  //   rechten: {
+  //     label: "Selecteer de rechten",
+  //     elementType: "select",
+  //     elementConfig: {
+  //       options: [
+  //         {
+  //           value: "Selecteer de rechten",
+  //           displayValue: " "
+  //         },
+  //         {
+  //           value: "Medewerker",
+  //           displayValue: "Medewerker"
+  //         },
+  //         {
+  //           value: "Functioneel beheerder",
+  //           displayValue: "Functioneel beheerder"
+  //         },
+  //         {
+  //           value: "Technisch beheerder",
+  //           displayValue: "Technisch beheerder"
+  //         }
+  //       ]
+  //     },
+  //     value: "",
+  //     validation: {},
+  //     valid: false,
+  //     touched: false
+  //   }
+  // },
+  // formIsValid: false
 };
 
 // fetch all users
@@ -202,8 +201,8 @@ const addUserStart = (state, action) => {
 
 const addUserSucces = (state, action) => {
   const newUser = updateObject(action.userData, {
-    userId: action.userId,
-    companyId: action.companyId
+    // userId: action.userId,
+    // companyId: action.companyId
   });
   return updateObject(state, {
     loading: false,

@@ -20,7 +20,7 @@ class Users extends Component {
     this.props.history.push({ pathname: this.props.match.url + "/add-user" });
   };
 
-  editUserHandler = id => {
+  editUserHandler = (id) => {
     this.props.history.push({pathname: this.props.match.url + "/edit-user/" + id
     });
   };

@@ -7,7 +7,7 @@ import { faGasPump, faInfoCircle} from '@fortawesome/free-solid-svg-icons'
 
 const tank = props => (
     <div className={classes.Tank}>
-    {/* <p>{props.id}</p> */}
+    <p>Id: {props.tankId}</p>
       <p>{<FontAwesomeIcon icon={faGasPump}/>} {props.tanknaam}</p>
       <p>{<FontAwesomeIcon icon={faInfoCircle}/>} {props.status}</p>
       <span className={classes.Button}>

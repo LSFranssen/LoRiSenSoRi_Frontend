@@ -1,84 +1,54 @@
-.wrapper {
-    display: grid;
-    grid-gap: 15px;
-    gap: 15x;
-    /*grid-template-columns: repeat(4, 80px);
-    grid-template-rows: repeat(3,100px);*/
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-    
-  .Logo img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .one {
-    grid-column: auto / span 4;
-  }
-
-  .two { 
-    grid-column: auto / span 2;
-    grid-row: auto / span 1;
-  }
-
-  .three {
-    grid-column: auto / span 1;
-    grid-row: auto / span 1;
-  }
-
-  .four {
-    grid-column: auto / span 1;
-    grid-row: auto / span 2;
-  }
-
-  .five {
-    grid-column: auto / span 2;
-    grid-row: auto / span 2;
-  }
-
-  .six {
-    grid-column: auto / span 1;
-    grid-row: auto / span 1;
-  }
-
-  span {
-    text-align: center;
-  }
-
-
-/*
-.Home {
+.Container {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-template-rows: auto auto auto auto;
-  grid-auto-flow: row;
-  background-color: inherit;
-  margin-left: 10px;
-  border-radius: 3px;
+  grid-gap: 15px;
+  gap: 15px;
+  /*grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(3,100px);*/
+  grid-template-rows: 1fr min-content; 
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+}
+  
+.Logo img {
+  width: 100%;
+  height: 100%;
 }
 
-h3 {
-  margin-left: 20px;
+.one {
+  grid-column: auto / span 1;
+  grid-row: auto / span 1;
 }
 
-@media (min-width: 500px) and (min-height: 400px) {
-  .Home {
-    width: 350px;
-    height: 300px;
-  }
+.two { 
+  grid-column: auto / span 1;
+  grid-row: auto / span 1;
 }
 
-@media (min-width: 500px) and (min-height: 401px) {
-  .Home {
-    width: 450px;
-    height: 400px;
-  }
+.three {
+  grid-column: auto / span 1;
+  grid-row: auto / span 1;
 }
 
-@media (min-width: 1000px) and (min-height: 800px) {
-  .Home {
-    width: 1400px;
-    height: 750px;
-  }
+.four {
+  grid-column: auto / span 1;
+  grid-row: auto / span 2;
 }
-*/
+
+.five {
+  grid-column: auto / span 4;
+  grid-row: auto / span 4;
+}
+
+.six {
+  grid-column: auto / span 1;
+  grid-row: auto / span 1;
+}
+
+span {
+  text-align: center;
+}
+
+.Icon {
+  font-size: 40px;
+}
+

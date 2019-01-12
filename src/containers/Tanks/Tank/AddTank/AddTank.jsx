@@ -13,6 +13,20 @@ import Form from "../../../../components/Form/Form";
 class AddTank extends Component {
   state = {
     tankForm: {
+      tanknummer: {
+        elementType: "input",
+        elementConfig: {
+          type: "number",
+          placeholder: "Tanknummer"
+        },
+        value: "",
+        validation: {
+          required: false
+        },
+        valid: false,
+        touched: false
+      },
+
       tanknaam: {
         elementType: "input",
         elementConfig: {

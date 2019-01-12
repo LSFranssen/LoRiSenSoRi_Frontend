@@ -3,8 +3,7 @@ import { updateObject } from "../../shared/update";
 
 const initialState = {
   token: null,
-  userId: null,
-  error: null,
+  refreshToken: null,
   loading: false
 };
 
@@ -17,9 +16,8 @@ const authStart = (state, action) => {
 
 const authSucces = (state, action) => {
   return updateObject(state, {
-    token: action.idToken, // tokennaam van backend
-    userId: action.userId,
-    error: null,
+    token: action.accessToken, 
+    refreshToken: action.refreshToken,
     loading: false
   });
 };
@@ -34,7 +32,7 @@ const authFail = (state, action) => {
 const authLogout = (state, action) => {
   return updateObject(state, {
     token: null,
-    userId: null
+    refreshToken: null
   });
 };
 

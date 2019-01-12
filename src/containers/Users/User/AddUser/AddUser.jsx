@@ -166,7 +166,7 @@ class AddUser extends Component {
       }
     },
     formIsValid: false,
-    loading: false,
+
    // loadUser: null,
   };
 
@@ -221,6 +221,7 @@ class AddUser extends Component {
     this.props.history.push("/users");
   };
 
+  // deze helemaal in reducere
   inputChangedHandler = (event, inputIdentifier) => {
     const updatedUserFormElement = updateObject(
       this.state.userForm[inputIdentifier],
@@ -253,6 +254,7 @@ class AddUser extends Component {
       </h3>
     );
 
+    // props van maken
     const formElementsArray = [];
     for (let key in this.state.userForm) {
       formElementsArray.push({

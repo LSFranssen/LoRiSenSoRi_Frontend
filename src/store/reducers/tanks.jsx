@@ -3,7 +3,8 @@ import { updateObject } from "../../shared/update";
 
 const initialState = {
   tanks: [],
-  loading: false
+  loading: false,
+  tankId: null
 };
 
 // fetch all tanks
@@ -14,7 +15,8 @@ const fetchTanksStart = (state, action) => {
 const fetchTanksSucces = (state, action) => {
   return updateObject(state, {
     tanks: action.tanks,
-    loading: false
+    loading: false,
+    tankId: action.tanks.tankId
   });
 };
 
@@ -28,10 +30,10 @@ const deleteTankByIdStart = (state, action) => {
 };
 
 const deleteTankByIdSucces = (state, action) => {
-  const updatedTanks = state.tanks.filter(tank => tank.id !== action.id);
+  const updatedTanks = state.tanks.filter(tank => tank.tankId !== action.tankId);
   return updateObject(state, {
     loading: false,
-    users: updatedTanks
+    tanks: updatedTanks
   });
 };
 

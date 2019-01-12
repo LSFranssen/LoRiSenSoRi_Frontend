@@ -214,7 +214,7 @@ class AddCompany extends Component {
       companyData: formData
     };
     axios
-      .post("/companies.json", company) /*endpoint!*/
+      .post("http://localhost:9004/bedrijfs/", company) /*endpoint!*/
       .then(response => {
         console.log(response);
         this.setState({ loading: false });

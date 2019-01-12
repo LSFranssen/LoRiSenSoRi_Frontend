@@ -15,6 +15,10 @@ code {
     monospace;
 }
 
+h4 {
+  font-size: 14px;
+}
+
 /* todo */
 @media (min-width: 768px) and (max-width: 1024px) {
   body {

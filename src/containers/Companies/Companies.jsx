@@ -16,7 +16,7 @@ class Companies extends Component {
   // };
 
   componentDidMount() {
-    this.props.onFetchCompanies();
+    this.props.onFetchCompanies(this.props.token);
   }
 
   addingCompanyHandler = () => {
@@ -96,13 +96,14 @@ class Companies extends Component {
 const mapStateToProps = state => {
   return {
     companies: state.companies.companies,
-    loading: state.companies.loading
+    loading: state.companies.loading,
+    token: state.auth.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchCompanies: () => dispatch(actions.fetchCompanies()),
+    onFetchCompanies: (token) => dispatch(actions.fetchCompanies(token)),
     onDeleteCompanies: (id) => dispatch(actions.deleteCompany(id))
   };
 };

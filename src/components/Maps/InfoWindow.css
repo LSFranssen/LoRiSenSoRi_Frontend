@@ -1,0 +1,8 @@
+.InfoWindow {
+    border: 1px solid #333333;
+    border-radius: 3px;
+    text-align: center;
+    background-color: white;
+    width: auto;
+    height: auto;
+  }
