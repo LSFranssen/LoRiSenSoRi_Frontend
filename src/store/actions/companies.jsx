@@ -22,23 +22,17 @@ export const fetchCompaniesFail = error => {
   };
 };
 
-export const fetchCompanies = (token) => {
+export const fetchCompanies = () => {
   return dispatch => {
     dispatch(fetchCompaniesStart());
-    console.log(localStorage.getItem("token"));
-    console.log(token);
-    // const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:9004/bedrijf/", { 
-        headers: { Authorization: "Bearer " + token,
-        'Content-Type': 'application/json'
-     }})
+      .get("http://localhost:9004/bedrijf/")
       .then(companies => {
         const fetchedCompanies = [];
         for (let key in companies.data) {
           fetchedCompanies.push({
             ...companies.data[key],
-            id: key
+            // companyId: key
           });
         }
         dispatch(fetchCompaniesSucces(fetchedCompanies));
@@ -56,11 +50,11 @@ const deleteCompanyByIdStart = () => {
   };
 };
 
-const deleteCompanyByIdSucces = (companies, id) => {
+const deleteCompanyByIdSucces = (companies, companyId) => {
   return {
     type: actionTypes.DELETE_COMPANY_BY_ID_SUCCESS,
     companies: companies,
-    id: id
+    companyId: companyId
   };
 };
 
@@ -71,15 +65,15 @@ const deleteCompanyByIdFail = error => {
   };
 };
 
-export const deleteCompany = id => {
+export const deleteCompany = companyId => {
   return dispatch => {
     dispatch(deleteCompanyByIdStart());
     axios
-      .delete("/companies/" + id + ".json")
+      .delete("http://localhost:9004/bedrijf/" + companyId)
       .then(response => {
         dispatch(deleteCompanyByIdSucces(response));
         dispatch(fetchCompanies());
-        console.log(response);
+        console.log(response.data);
       })
       .catch(error => {
         dispatch(deleteCompanyByIdFail(error));

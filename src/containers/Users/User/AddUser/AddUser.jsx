@@ -15,8 +15,8 @@ import * as actions from "../../../../store/actions/index";
 
 class AddUser extends Component {
   state = {
-    // companyId: null, hoe deze mee te sturen
-    // userId: null, hoe deze mee te sturen
+    // companyId: null, 
+    // userId: null, 
     userForm: {
       voornaam: {
         elementType: "input",
@@ -99,8 +99,7 @@ class AddUser extends Component {
         },
         valid: false,
         touched: false,
-        errorMessage:
-          "Een wachtwoord moet bestaan uit minimaal 8 karakters, een hoofdletter, kleine letter, nummer en speciaal karakter"
+        errorMessage:"Een wachtwoord moet bestaan uit minimaal 8 karakters, een hoofdletter, kleine letter, nummer en speciaal karakter"
       },
 
       email: {
@@ -167,30 +166,11 @@ class AddUser extends Component {
     },
     formIsValid: false,
 
-   // loadUser: null,
   };
 
   componentDidMount() {
-    if (this.props.match.params.id === "edit-user") {
+    if (this.props.match.params.userId) {
       this.props.onFetchUser();
-    //   axios
-    //     .get("/users/-LV3m8D5JfVVkKoKrtv6.json")
-    //     .then(users => {
-    //       // const fetchedUsers = [];
-    //       // for (let key in users.data) {
-    //       //   fetchedUsers.push({
-    //       //     ...users.data[key],
-    //       //     id: key
-    //       //   });
-    //       // }
-    //       this.setState({ loading: false, users: users.data });
-    //       console.log(users);
-    //       console.log("users.voornaam: " + users.data.userData.voornaam);
-    //       console.log("users.achternaam: " + users.data.userData.achternaam);
-    //     })
-    //     .catch(error => {
-    //       this.setState({ loading: false });
-    //     });
      }
   }
 
@@ -203,10 +183,9 @@ class AddUser extends Component {
     }
     const user = {
       userData: formData,
-      // userId: userId
     };
     axios
-      .post("/users.json", user) //endpoint
+      .post("/bedrijf/addmedewerker/", user)
       .then(response => {
         console.log(response);
         this.setState({ loading: false });
@@ -221,7 +200,6 @@ class AddUser extends Component {
     this.props.history.push("/users");
   };
 
-  // deze helemaal in reducere
   inputChangedHandler = (event, inputIdentifier) => {
     const updatedUserFormElement = updateObject(
       this.state.userForm[inputIdentifier],
@@ -247,18 +225,14 @@ class AddUser extends Component {
 
   render() {
     const title = (
-      <h3>
-        {this.props.match.params.id === "add-user"
-          ? "Toevoegen gebruiker"
-          : "Wijzigen gebruiker"}
-      </h3>
+      <h3>{this.props.match.params.userId ? "Wijzigen gebruiker" : "Toevoegen gebruiker"}</h3>
     );
 
     // props van maken
     const formElementsArray = [];
     for (let key in this.state.userForm) {
       formElementsArray.push({
-        id: key,
+        userId: key,
         setup: this.state.userForm[key]
       });
     }
@@ -272,7 +246,6 @@ class AddUser extends Component {
             elementType={formElement.setup.elementType}
             elementConfig={formElement.setup.elementConfig}
             value={formElement.setup.value}
-            //  value={this.state.userForm.achternaam.value}
             invalid={!formElement.setup.valid}
             schouldValidate={formElement.setup.validation}
             touched={formElement.setup.touched}
@@ -292,7 +265,7 @@ class AddUser extends Component {
       </Form>
     );
 
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
 
@@ -301,9 +274,7 @@ class AddUser extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onFetchUser: (id) => dispatch(actions.fetchUserById(id)),
-  };
+  return {onFetchUser: (userId) => dispatch(actions.fetchUserById(userId)), };
 };
 
 export default connect(null, mapDispatchToProps)(withRouter(withErrorHandler(AddUser, axios)));

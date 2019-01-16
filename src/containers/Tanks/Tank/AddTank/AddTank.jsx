@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import classes from "./AddTank.css";
 import Button from "../../../../components/Common/Button/Button";
@@ -9,6 +10,8 @@ import axios from "../../../../axios-users";
 import withErrorHandler from "../../../../hoc/withErrorHandler/withErrorHandler";
 import { checkValidation } from "../../../../shared/validation";
 import Form from "../../../../components/Form/Form";
+import * as actions from "../../../../store/actions/index";
+import { updateObject } from "../../../../shared/update";
 
 class AddTank extends Component {
   state = {
@@ -21,10 +24,11 @@ class AddTank extends Component {
         },
         value: "",
         validation: {
-          required: false
+          required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer een tanknummer in"
       },
 
       tanknaam: {
@@ -37,11 +41,12 @@ class AddTank extends Component {
         validation: {
           required: true
         },
-        valid: true,
-        touched: false
+        valid: false,
+        touched: false,
+        errorMessage: "Voer een tanknaam in"
       },
 
-      tanktype: {
+      type: {
         elementType: "input",
         elementConfig: {
           type: "text",
@@ -52,7 +57,8 @@ class AddTank extends Component {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer een type in"
       },
 
       bouwjaar: {
@@ -66,10 +72,11 @@ class AddTank extends Component {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer een bouwjaar in"
       },
-      
-      inhoud: {
+
+      inhoudLiters: {
         elementType: "input",
         elementConfig: {
           type: "number",
@@ -80,7 +87,8 @@ class AddTank extends Component {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer de inhoud in"
       },
 
       diameter: {
@@ -94,7 +102,8 @@ class AddTank extends Component {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer de diameter van de tank in"
       },
 
       lengte: {
@@ -108,21 +117,23 @@ class AddTank extends Component {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer de lengte van de tank in"
       },
 
       gewicht: {
         elementType: "input",
         elementConfig: {
           type: "number",
-          placeholder: "Gewicht in kilo's"
+          placeholder: "Leeg gewicht in kilo's"
         },
         value: "",
         validation: {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer het gewicht van de tank in"
       },
 
       openingstijd: {
@@ -137,7 +148,8 @@ class AddTank extends Component {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer de openingstijden van de tank in"
       },
 
       sluitingstijd: {
@@ -152,7 +164,23 @@ class AddTank extends Component {
           required: true
         },
         valid: false,
-        touched: false
+        touched: false,
+        errorMessage: "Voer de sluitingstijden van de tank in"
+      },
+
+      meldingTanken: {
+        elementType: "input",
+        elementConfig: {
+          type: "number",
+          placeholder: "Percentage leeg voor melding"
+        },
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false,
+        errorMessage: "Voer het percentage van het dieselniveau in"
       },
 
       status: {
@@ -165,15 +193,15 @@ class AddTank extends Component {
               displayValue: " "
             },
             {
-              value: "In gebruik",
+              value: "INGEBRUIK",
               displayValue: "In gebruik"
             },
             {
-              value: "Non-actief",
+              value: "NONACTIEF",
               displayValue: "Non-actief"
             },
             {
-              value: "In reparatie",
+              value: "INREPARATIE",
               displayValue: "In reparatie"
             }
           ]
@@ -184,21 +212,12 @@ class AddTank extends Component {
         touched: false
       }
     },
-    formIsValid: false,
-    loading: false
+    formIsValid: false
   };
 
   componentDidMount() {
-    if (this.props.match.params.id === "edit-tank") {
-      axios
-        .get("/tanks/-LUzgXHn-CxVu48M9BrX.json")
-        .then(tanks => {
-          this.setState({ loading: false, tanks: tanks.data });
-          console.log(tanks);
-        })
-        .catch(error => {
-          this.setState({ loading: false });
-        });
+    if (this.props.match.params.tankId) {
+      this.props.onFetchTankById(this.props.match.params.tankId);
     }
   }
 
@@ -212,39 +231,39 @@ class AddTank extends Component {
       ].value;
     }
     const tank = {
-      tankData: formData
+      tankData: formData,
     };
-    axios
-      .post("/tanks.json", tank) //endpoint
-      .then(response => {
-        console.log(response);
-        this.setState({ loading: false });
-        this.props.history.push("/tanks");
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+
+    if (this.props.match.params.tankId) {
+      // put maken
+      console.log("wijzigen");
+    } else {
+      this.props.onAddTank(tank);
+      console.log("Toevoegen");
+      console.log(tank);
+    }
   };
 
   cancelAddTankHandler = () => {
     this.props.history.push("/tanks");
   };
 
+  // wijzigen naar updateobject
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedTankForm = {
-      ...this.state.tankForm
-    };
-    const updatedTankFormElement = {
-      ...updatedTankForm[inputIdentifier]
-    };
-    updatedTankFormElement.value = event.target.value;
-    updatedTankFormElement.touched = true;
-    updatedTankFormElement.valid = checkValidation(
-      updatedTankFormElement.value,
-      updatedTankFormElement.validation
+    const updatedTankFormElement = updateObject(
+      this.state.tankForm[inputIdentifier],
+      {
+        value: event.target.value,
+        valid: checkValidation(
+          event.target.value,
+          this.state.tankForm[inputIdentifier].validation
+        ),
+        touched: true
+      }
     );
-    updatedTankForm[inputIdentifier] = updatedTankFormElement;
-    console.log(updatedTankFormElement);
+    const updatedTankForm = updateObject(this.state.tankForm, {
+      [inputIdentifier]: updatedTankFormElement
+    });
 
     let formIsValid = true;
     for (let inputIdentifier in updatedTankForm) {
@@ -256,11 +275,7 @@ class AddTank extends Component {
   render() {
     const formElementsArray = [];
     const title = (
-      <h3>
-        {this.props.match.params.id === "add-tank"
-          ? "Toevoegen tank"
-          : "Wijzigen tank"}
-      </h3>
+      <h3>{this.props.match.params.tankId ? "Wijzigen tank" : "Toevoegen tank"}</h3>
     );
 
     for (let key in this.state.tankForm) {
@@ -271,14 +286,14 @@ class AddTank extends Component {
     }
     let form = (
       <Form onSubmit={this.saveAddTankHandler}>
-          {title}
+        {title}
         {formElementsArray.map(formElement => (
           <Input
             label={formElement.setup.label}
             key={formElement.id}
             elementType={formElement.setup.elementType}
             elementConfig={formElement.setup.elementConfig}
-            value={formElement.setup.value} 
+            value={formElement.setup.value}
             invalid={!formElement.setup.valid}
             schouldValidate={formElement.setup.validation}
             touched={formElement.setup.touched}
@@ -291,24 +306,46 @@ class AddTank extends Component {
             clicked={this.saveAddTankHandler}
             disabled={!this.state.formIsValid}
           >
-            Save
+            Opslaan
           </Button>
-          <Button clicked={this.cancelAddTankHandler}>Cancel</Button>
+          <Button clicked={this.cancelAddTankHandler}>Annuleer</Button>
         </section>
       </Form>
     );
 
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
-
-    return (
-      <div >
-        {form}
-      </div>
-    );
+    return <div>{form}</div>;
   }
 }
 
-export default withRouter(withErrorHandler(AddTank, axios));
+const mapStateToProps = state => {
+  return {
+    loading: state.tanks.loading,
+    tank: state.tanks.tank,
+    bouwjaar: state.tanks.bouwjaar,
+    diameter: state.tanks.diameter,
+    gewicht: state.tanks.gewicht,
+    inhoud: state.tanks.inhoud,
+    lengte: state.tanks.lengte,
+    meldingTanken: state.tanks.meldingTanken,
+    openingstijd: state.tanks.openingstijd,
+    sluitingstijd: state.tanks.sluitingstijd,
+    status: state.tanks.status,
+    tankId: state.tanks.tankId,
+    tanknaam: state.tanks.tanknaam,
+    tanknummer: state.tanks.tanknummer,
+    type: state.tanks.type
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddTank: tankData => dispatch(actions.addTank(tankData)),
+    onFetchTankById: tankId => dispatch(actions.fetchTankById(tankId))
+    // put erbij
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withErrorHandler(AddTank, axios)));

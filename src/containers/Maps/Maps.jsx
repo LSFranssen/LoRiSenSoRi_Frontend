@@ -4,9 +4,8 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.onScriptLoad = this.onScriptLoad.bind(this);
-   // this.createInfoWindow = this.createInfoWindow.bind(this);
+    // this.createInfoWindow = this.createInfoWindow.bind(this);
     this.markers = [];
-    // this.config = props.mapData.config;
   }
 
   onScriptLoad = () => {
@@ -17,22 +16,22 @@ class Map extends Component {
     this.props.onMapLoad(map);
   };
 
-    // createInfoWindow = (e, map) => {
-    //   const infoWindow = new window.google.maps.InfoWindow({
-    //       content: '<div id="infoWindow" />',
-    //       position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
-    //   })
-    //   infoWindow.addListener('domready', e => {
-    //     render(<InfoWindow />, document.getElementById('infoWindow'))
-    //   })
-    //   infoWindow.open(map)
-    // }
+  // createInfoWindow = (e, map) => {
+  //   const infoWindow = new window.google.maps.InfoWindow({
+  //       content: '<div id="infoWindow" />',
+  //       position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
+  //   })
+  //   infoWindow.addListener('domready', e => {
+  //     render(<InfoWindow />, document.getElementById('infoWindow'))
+  //   })
+  //   infoWindow.open(map)
+  // }
 
   componentDidMount() {
     if (!window.google) {
       var s = document.createElement("script");
       s.type = "text/javascript";
-      s.src = `https://maps.google.com/maps/api/js?key=[]`;
+      s.src = `https://maps.google.com/maps/api/js?key[API-KEY]`;
       var x = document.getElementsByTagName("script")[0];
       x.parentNode.insertBefore(s, x);
       s.addEventListener("load", e => {
@@ -53,7 +52,7 @@ class Map extends Component {
   };
 
   render() {
-    return <div style={{ width: "auto", height: 360 }} id={this.props.id} />;
+    return <div style={{ width: "auto", height: 400 }} id={this.props.id} />;
   }
 }
 

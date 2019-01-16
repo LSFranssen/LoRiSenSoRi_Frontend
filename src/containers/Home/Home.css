@@ -1,47 +1,38 @@
-.Container {
+.wrapper {
   display: grid;
   grid-gap: 15px;
   gap: 15px;
-  /*grid-template-columns: repeat(4, 80px);
-  grid-template-rows: repeat(3,100px);*/
   grid-template-rows: 1fr min-content; 
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
-  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
   
-.Logo img {
-  width: 100%;
-  height: 100%;
-}
-
 .one {
   grid-column: auto / span 1;
   grid-row: auto / span 1;
 }
 
-.two { 
-  grid-column: auto / span 1;
-  grid-row: auto / span 1;
-}
-
-.three {
-  grid-column: auto / span 1;
-  grid-row: auto / span 1;
-}
-
-.four {
-  grid-column: auto / span 1;
+.two {
+  grid-column: auto / span 2;
   grid-row: auto / span 2;
 }
 
-.five {
+.three {
+  grid-column: auto / span 3;
+  grid-row: auto / span 3;
+}
+
+.four {
   grid-column: auto / span 4;
   grid-row: auto / span 4;
 }
 
+.five {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
 .six {
-  grid-column: auto / span 1;
-  grid-row: auto / span 1;
+  grid-column: 3;
+  grid-row: 4;
 }
 
 span {

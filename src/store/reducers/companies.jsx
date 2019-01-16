@@ -4,7 +4,6 @@ import { updateObject } from "../../shared/update";
 const initialState = {
   companies: [],
   loading: false,
-  // token: null
 };
 
 // fetch all companies
@@ -42,20 +41,13 @@ const deleteCompanyByIdFail = state => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_COMPANIES_START:
-      return fetchCompaniesStart(state, action);
-    case actionTypes.FETCH_COMPANIES_SUCCESS:
-      return fetchCompaniesSucces(state, action);
-    case actionTypes.FETCH_COMPANIES_FAIL:
-      return fetchCompaniesFail(state, action);
-    case actionTypes.DELETE_COMPANY_BY_ID_START:
-      return deleteCompanyByIdStart(state, action);
-    case actionTypes.DELETE_USER_BY_ID_SUCCESS:
-      return deleteCompanyByIdSucces(state, action);
-    case actionTypes.DELETE_USER_BY_ID_FAIL:
-      return deleteCompanyByIdFail(state, action);
-    default:
-      return state;
+    case actionTypes.FETCH_COMPANIES_START: return fetchCompaniesStart(state, action);
+    case actionTypes.FETCH_COMPANIES_SUCCESS: return fetchCompaniesSucces(state, action);
+    case actionTypes.FETCH_COMPANIES_FAIL: return fetchCompaniesFail(state, action);
+    case actionTypes.DELETE_COMPANY_BY_ID_START: return deleteCompanyByIdStart(state, action);
+    case actionTypes.DELETE_USER_BY_ID_SUCCESS: return deleteCompanyByIdSucces(state, action);
+    case actionTypes.DELETE_USER_BY_ID_FAIL: return deleteCompanyByIdFail(state, action);
+    default: return state;
   }
 };
 

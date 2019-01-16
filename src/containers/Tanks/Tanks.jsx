@@ -11,49 +11,27 @@ import * as actions from "../../store/actions/index";
 import Search from "../../components/Common/Search/Search";
 
 class Tanks extends Component {
-
   componentDidMount() {
-    this.props.onFetchTanks(this.props.token);
+    this.props.onFetchTanks();
   }
 
   overviewHandler = tankId => {
-    this.props.history.push({pathname: this.props.match.url + "/overview/" + tankId
-    });
+    this.props.history.push({pathname: this.props.match.url + "/overview/" + tankId});
   };
 
   addingTankHandler = () => {
     this.props.history.push({ pathname: this.props.match.url + "/add-tank" });
   };
 
-  // editTankHandler = (id) => {
-  //   this.props.history.push({pathname: this.props.match.url + "/edit-tank/" + id});
-  // }
-
-  editTankHandler = id => {
-    axios
-      .get("tanks/" + id + ".json")
-      .then(response => {
-        console.log(response);
-        this.setState({ loading: false });
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+  editTankHandler = tankId => {
+    this.props.history.push({pathname: this.props.match.url + "/edit-tank/" + tankId
+    });
   };
 
   removeTankHandler = tankId => {
     this.props.onDeleteTanks(tankId);
-    console.log("Removed: ")
+    console.log("Removed: ");
     console.log(tankId);
-  //   axios
-  //     .delete("tanks/" + id + ".json")
-  //     .then(response => {
-  //       console.log(response);
-  //       this.setState({ loading: false });
-  //     })
-  //     .catch(error => {
-  //       this.setState({ loading: false });
-  //     });
   };
 
   render() {
@@ -89,19 +67,18 @@ class Tanks extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownprops) => {
   return {
     tanks: state.tanks.tanks,
     loading: state.tanks.loading,
     token: state.auth.token,
-    tankId: state.tanks.tankId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchTanks: (token) => dispatch(actions.fetchTanks(token)),
-    onDeleteTanks: (tankId) => dispatch(actions.deleteTank(tankId))
+    onFetchTanks: () => dispatch(actions.fetchTanks()),
+    onDeleteTanks: tankId => dispatch(actions.deleteTank(tankId))
   };
 };
 

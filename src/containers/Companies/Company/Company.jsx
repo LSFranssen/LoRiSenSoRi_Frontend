@@ -7,7 +7,6 @@ import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 
 const company = props => (
   <div className={classes.Company}>
-    {/* <p>{props.id}</p> */}
     <p>{<FontAwesomeIcon icon={faBuilding} />} {props.bedrijfsnaam}</p>
     <p>{<FontAwesomeIcon icon={faLocationArrow} />} {props.straatnaam} {props.huisnummer} {props.huisnummerToevoeging} , {props.postcode}, {props.plaats}
     </p>

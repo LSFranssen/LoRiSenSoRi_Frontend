@@ -44,7 +44,7 @@ class AddCompany extends Component {
       huisnummer: {
         elementType: "number",
         elementConfig: {
-          type: "text",
+          type: "number",
           placeholder: "Huisnummer"
         },
         value: "",
@@ -122,6 +122,20 @@ class AddCompany extends Component {
         valid: true
       },
 
+      contactpersoon: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Contactpersoon"
+        },
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false
+      },
+
       telefoonnummer: {
         elementType: "input",
         elementConfig: {
@@ -136,7 +150,7 @@ class AddCompany extends Component {
         },
         valid: false,
         touched: false,
-        errorMessage: "Please enter a valid phone number"
+        errorMessage: "Voer een geldig telefoonnummer in"
       },
 
       rekeningnummer: {
@@ -186,20 +200,11 @@ class AddCompany extends Component {
   
   };
 
-  // componentDidMount() {
-  //   if (this.props.match.params.id === "edit-company") {
-  //     axios
-  //       .get("/companies/-LV3m8D5JfVVkKoKrtv6.json")
-  //       .then(company => {
-  //         this.setState({ loading: false, company: company.data });
-  //         console.log("data van 1" + company);
-  //         console.log(company);
-  //       })
-  //       .catch(error => {
-  //         this.setState({ loading: false });
-  //       });
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      this.props.onFetchCompany();
+    }
+  }
 
   saveAddCompanyHandler = event => {
     event.preventDefault();
@@ -214,7 +219,7 @@ class AddCompany extends Component {
       companyData: formData
     };
     axios
-      .post("http://localhost:9004/bedrijfs/", company) /*endpoint!*/
+      .post("http://localhost:9004/bedrijf/", company) /*endpoint!*/
       .then(response => {
         console.log(response);
         this.setState({ loading: false });
@@ -256,11 +261,7 @@ class AddCompany extends Component {
 
   render() {
     const title = (
-      <h3>
-        {this.props.match.params.id === "add-company"
-          ? "Toevoegen bedrijf"
-          : "Wijzigen bedrijf"}
-      </h3>
+      <h3>{this.props.match.params.id ? "Wijzigen bedrijf" : "Toevoegen bedrijf"}</h3>
     );
 
     const formElementsArray = [];

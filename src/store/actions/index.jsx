@@ -11,13 +11,18 @@ export {
   fetchUserById,
   addUser,
   deleteUser,
-  // handleChangeUserform
 } from './users'
 
 // Tanks
 export {
   fetchTanks,
-  deleteTank
+  addTank,
+  fetchTankById,
+  fetchTankOverviewById,
+  fetchTankSensorlogById,
+  deleteTank,
+  postSlotOpen,
+  postSlotDicht,
 } from './tanks'
 
 // Companies

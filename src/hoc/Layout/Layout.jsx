@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "./Layout.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
-//import Footer from '../Layout/Footer/Footer';
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 
 class Layout extends Component {

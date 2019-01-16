@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import classes from "./Home.css";
 import Widget from "../../components/Common/Widget/Widget";
 import Map from "../Maps/Maps";
+import Log from "../../components/Tables/Log/Log";
+import Alarm from "../../components/Tables/Alarm/Alarm"
 
 class Home extends Component {
   state = {
@@ -14,29 +16,30 @@ class Home extends Component {
     return (
       <>
         <h3>Overzicht dashboard</h3>
-        <section className={classes.Container}>
+        <div className={classes.wrapper}>
           <div className={classes.one}>
-            <Widget title="Iets" contentType="Number">
-              <span>accuniveau</span>
+            <Widget title="Accuniveau" contentType="Number">
+              <span>Gesorteerde lijst op accuniveau</span>
             </Widget>
           </div>
+
+          <div className={classes.one}>
+            <Widget title="Dieselniveau" contentType="Number">
+              <span>Gesorteerde lijst op dieselniveau</span>
+            </Widget>
+          </div>
+
           <div className={classes.two}>
-            <Widget title="Nog iets" contentType="Number">
-              <span>...liter</span>
+            <Widget title="Alarmen">
+              <Alarm>{/* log={sensorlogTanks} */}</Alarm>
             </Widget>
           </div>
-          <div className={classes.three}>
-            <Widget title="Iets" contentType="Number">
-              <span>accuniveau</span>
-            </Widget>
-          </div>
+
           <div className={classes.four}>
-            <Widget title="Nog iets" contentType="Number">
-              <span>...liter</span>
-            </Widget>
-          </div>
-          <div className={classes.five}>
             <Widget title="Locatie" contentType="Maps">
+            <div>
+              TODO
+            </div>
               <div className={classes.Map}>
                 <Map
                   id="myMap"
@@ -55,7 +58,13 @@ class Home extends Component {
               </div>
             </Widget>
           </div>
-        </section>
+
+          <div className={classes.four}>
+            <Widget title="Sensorlog">
+              <Log>TODO</Log>
+            </Widget>
+          </div>
+        </div>
       </>
     );
   }
